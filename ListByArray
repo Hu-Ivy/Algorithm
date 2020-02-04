@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int;
+typedef struct Lnode *List;
+struct Lnode
+{
+    ElementType Data[MAXSIZE];
+    int last;
+};
+//初始化
+List MakeEmpty()
+{
+    List PtrL;
+    PtrL=(List)malloc(sizeof(struct Lnode));
+    PtrL->last=-1;
+    return PtrL;
+}
+int Find(ElementType X,List PtrL)
+{
+    int i=0;
+    while(i<=PtrL->last&&PtrL->Data[i]!=X)
+    {
+       i++;
+    }
+    if(i>PtrL->last) return -1;
+    else return i;
+    
+}
+//平均复杂度n/2,o(n)
+void Insert(ElementType X,int i,List PtrL)
+{
+    if(PtrL->last==MAXSIZE-1)
+    {
+        printf("list is full...");
+        return;
+    }
+    if(i<1||i>PtrL->last+2)
+    {
+        printf("input is not illegal...");
+        return;
+    }
+    for(j=PtrL->last;j>=i-1;j--)
+    {
+        PtrL->Data[j+1]=PtrL->Data[j];
+    }
+    PtrL->Data[i-1]=X;
+    PtrL->last++;
+}
+//复杂度（n-1）/2,O(n)
+void Delete(int i,List PtrL)
+{
+    if(PtrL->last==-1)
+    {
+        printf("list is empty...");
+        return;
+    }
+    if(i<1||i>PtrL->last+2)
+    {
+        printf("input is not illegal...");
+        return;
+    }
+    while(i<=PtrL->last)
+    {
+        PtrL->Data[i-1]=PtrL->Data[i];
+        i++;
+    }
+    PtrL->last--;
+    return;
+}
