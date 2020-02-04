@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int;
+#define MAXSIZE 100;
+typedef struct LNode *List;
+struct LNode()
+{
+    ElementType Data;
+    List Next;
+};
+int length(List PtrL)
+{
+    int i=0;
+    List p=PtrL;
+    while(p)
+    {
+        p=p->Next;
+        i++;
+    }
+
+    return i;
+}
+List FindKth(int k,List PtrL)
+{
+    List p=PtrL;
+    int i;
+    while(i<k&&p!=NULL)
+    {
+        p=p->Next;
+        i++;
+    }
+    if(i==k) return p;
+    else return NULL;
+}
+List Find(ElementType X,List PtrL)
+{
+    List p=PtrL;
+    while(X!=p->Data&&p!=NULL)
+    {
+        p=p->Next;
+    }
+    return p;
+}
+List Insert(ElementType X, int i,List PtrL)
+{
+    List newp;
+    List p;
+    if(i==1)
+    {
+        newp=(List)malloc(sizeof(struct LNode));
+        newp->Data=X;
+        newp->Next=PtrL;
+        return newp;
+    }
+    p=FindKth(i-1,PtrL);
+    if(p==NULL)
+    {
+        printf("parameter False...");
+        return NULL;
+    }
+    else
+    {
+        newp=(List)malloc(sizeof(struct LNode));
+        newp->Data=X;
+        newp->Next=p->Next;
+        p->Next=newp;
+        return PtrL;
+    }
+}
+List Delete(int i,List PtrL)
+{
+    List p,s;
+    if(i==1)
+    {
+        s=PtrL;
+        if(PtrL!=NULL) PtrL=PtrL->Next;
+        free(s);
+        return PtrL;
+    }
+    p=FindKth(i-1,PtrL);
+    if(p==NULL)
+    {
+        printf("the node doesn't exist...");
+    }
+    else
+    {
+        s=p->Next;
+        p->Next=s->Next;
+        free(s);
+        return PtrL;
+    }
+}
