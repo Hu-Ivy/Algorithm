@@ -1,0 +1,45 @@
+typedef struct SNode *Stack;
+struct SNode()
+{
+    ElementType Data;
+    Stack Next;
+};
+Stack CreateStack()
+{
+    Stack S;
+    S=(Stack)malloc(sizeof(struct SNode));
+    S->Next=NULL;
+    return S;
+}
+int IsEmpty(Stack S)
+{
+    return (S->Next==NULL);
+}
+void Push(Stack S,ElementType X)
+{
+    Stack TmpCell；
+    TmpCell=(Stack)malloc(sizeof(struct SNode));
+    TmpCell->Data=X;
+    TmpCell->Next=S->Next;
+    S->Next=TmpCell;
+}
+ElementType Pop(Stack S)
+{
+    Stack TmpCell；
+    ElementType item;
+    if(IsEmpty(S))
+    {
+        printf("the stack is empty...");
+        return NULL;
+    }
+    else
+    {
+        TmpCell=S->Next;
+        item=TmpCell->Data;
+        S->Next=TmpCell->Next;
+        free(TmpCell);
+        return item;        
+    }
+
+    
+}
