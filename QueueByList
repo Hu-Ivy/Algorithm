@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int;
+#define MAXSIZE 100;
+typedef struct Qnode *Queue;
+Queue PtrQ;
+struct Node
+{
+    ElementType Data;
+    struct Node *Next;
+} ;
+struct Qnode
+{
+    struct Node *rear;
+    struct Node *front;
+};
+void AddQ(Queue PtrQ,ElementType item)
+{
+    struct Node *newNode;
+    newNode=(Node)malloc(sizeof(struct Node));
+    newNode->Data=item;
+    newNode->Next=NULL;
+    if(PtrQ->front==NULL)
+    {
+        PtrQ->front=newNode;
+    }
+    else
+    {
+        PtrQ->rear->Next=newNode;
+
+    }
+    PtrQ->rear=newNode;
+}
+ElementType DeleteQ(Queue PtrQ)
+{
+    ElementType tem;
+    struct Node temNode;
+    if(PtrQ->front==NULL)
+    {
+        printf("the queue is empty...");
+        return ERROR;
+    }
+    temNode=Qnode->front;
+    if(PtrQ->front==PtrQ->rear)
+        PtrQ->front=PtrQ->rear=NULL;
+    else
+    {
+        Qnode->front=temNode->Next;
+    }
+    tem=temNode->Data;
+    free(temNode);
+    return  tem;
+}
