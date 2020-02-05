@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int;
+#define MAXSIZE 100;
+typedef struct SNode *Stack;
+struct SNode
+{
+    ElementType Data[MAXSIZE];
+    int top;
+};
+void Push(Stack PtrS,ElementType X)
+{
+    Stack p;
+    p=PtrS;
+    if(p->top==MAXSIZE-1)
+    {
+       printf("stack is full...");
+       return;
+    }
+
+    else
+    {
+        p->Data[++(p->top)]=X;
+        return;
+    }
+
+}
+ElementType Pop(Stack PtrS)
+{
+    ElementType item;
+    if(PtrS->top==-1)
+    {
+        printf("the stack is empty...");
+        return ERROR;
+    }
+    else
+    {
+        return PtrS->Data[(p->top)--];
+    }
+}
