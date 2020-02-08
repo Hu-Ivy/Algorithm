@@ -84,3 +84,31 @@ void PostOrderTraversal(BinTree BT)
 
     }
 }
+//层序遍历，利用队列
+#include <stdio.h>
+#include <stdlib.h>
+#define ElementType int;
+#define MAXSIZE 100;
+typedef struct TreeNode *BinTree;
+struct TreeNode
+{
+    ElementType Data;
+    BinTree Left;
+    BinTree right;
+};
+void LevelOrderTraversal(BinTree BT)
+{
+    BinTree T=BT;
+    Queue Q=CreateQueue(MAXSIZE);
+    AddQ(Q,T);
+    while(T||!IsEmpty(Q))
+    {
+        T=DeleteQ(Q);
+        if(T->Left)
+            Add(T->Left);
+        if(T->right)
+            Add(T->Right);
+        printf("%5d",T->Data);
+    }
+}
+
